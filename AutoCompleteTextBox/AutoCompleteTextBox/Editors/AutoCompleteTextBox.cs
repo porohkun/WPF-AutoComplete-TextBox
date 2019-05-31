@@ -187,6 +187,8 @@ namespace AutoCompleteTextBox.Editors
 
         public SelectionAdapter SelectionAdapter { get; set; }
 
+        public event Action SelectionAdapterCommit;
+
         public string Text
         {
             get => (string)GetValue(TextProperty);
@@ -400,6 +402,7 @@ namespace AutoCompleteTextBox.Editors
                 SetSelectedItem(ItemsSelector.SelectedItem);
                 _isUpdatingText = false;
                 IsDropDownOpen = false;
+                SelectionAdapterCommit?.Invoke();
             }
         }
 
